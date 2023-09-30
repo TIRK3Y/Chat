@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Movie Ticket Booking - Book Tickets</title>
+  <style>
+    /* Add your custom CSS for the glassmorphism effect here */
+    .glass-container {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 400px;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Add more styles as needed */
+  </style>
+</head>
+<body>
+  <div class="glass-container">
+    <h2>Book Tickets</h2>
+
+    <% if (user) { %>
+      <p>Welcome, <%= user.username %>!</p>
+    <% } %>
+
+    <div class="movie-details">
+      <h3><%= movie.title %></h3>
+      <p><strong>Genre:</strong> <%= movie.genre %></p>
+      <p><strong>Duration:</strong> <%= movie.duration %> minutes</p>
+      <p><strong>Release Date:</strong> <%= movie.releaseDate.toISOString().slice(0, 10) %></p>
+      <p><strong>Description:</strong> <%= movie.description %></p>
+    </div>
+
+    <% if (message) { %>
+      <div class="message">
+        <%= message %>
+      </div>
+    <% } %>
+
+    <form action="/book/<%= movie._id %>" method="POST">
+      <button class="book-button" type="submit">Book Ticket</button>
+    </form>
+  </div>
+
+  <footer>
+    <p>&copy; 2023 Movie Ticket Booking</p>
+  </footer>
+</body>
+</html>

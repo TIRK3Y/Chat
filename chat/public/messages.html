@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WhatsApp-like Messages</title>
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-header">
+      <span>Contact Name</span>
+    </div>
+    <div class="message-list" id="message-list">
+      <!-- Existing messages will be displayed here -->
+    </div>
+    <div class="message-input">
+      <input type="text" id="message-input" placeholder="Type a message...">
+      <button id="send-button">Send</button>
+    </div>
+  </div>
+
+  <!-- Include the Socket.io library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.3/socket.io.js"></script>
+  <script src="./script.js"></script>
+</body>
+</html>

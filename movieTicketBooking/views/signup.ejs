@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Signup</title>
+    <link rel="stylesheet" type="text/css" href="../public/styles.css">
+    <!-- Add any other head content you need -->
+    <style>
+        /* Styles for the signup popup */
+        .signup-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .signup-form {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Signup Popup -->
+    <div class="signup-popup" id="signupPopup">
+        <div class="signup-form">
+            <h2>Signup</h2>
+            <form action="/signup" method="POST">
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <button type="submit">Signup</button>
+            </form>
+            <p>Already have an account? <a href="/login">Login</a></p>
+        </div>
+    </div>
+
+    <button id="showSignupPopup">Signup</button>
+
+    <script>
+        const showSignupPopupButton = document.getElementById('showSignupPopup');
+        const signupPopup = document.getElementById('signupPopup');
+    
+        // Show popup
+        showSignupPopupButton.addEventListener('click', () => {
+            signupPopup.style.display = 'flex';
+        });
+    
+        // Close popup when clicking outside
+        document.addEventListener('click', (event) => {
+            if (event.target === signupPopup) {
+                signupPopup.style.display = 'none';
+            }
+        });
+    </script>
+    
+    
+</body>
+</html>
