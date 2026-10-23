@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
@@ -16,8 +17,8 @@ const io = socketIo(server);
 app.use(bodyParser.json());
 app.use(cors());
 
-// Connect to MongoDB (update the MongoDB connection string)
-mongoose.connect('mongodb://localhost:27017/testdb', {
+// Connection string and JWT secret come from the environment (see .env.example)
+mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/testdb', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -38,7 +39,11 @@ const Message = require('./models/Message');
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Secret key for JWT
-const secretKey = 'e5d36109087c7064';
+const secretKey = process.env.JWT_SECRET;
+if (!secretKey) {
+  console.error('JWT_SECRET is not set. Copy .env.example to .env and set a long random value.');
+  process.exit(1);
+}
 
 // Set up Socket.io
 const onlineUsers = new Set(); // Store online users

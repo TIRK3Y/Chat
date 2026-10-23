@@ -24,18 +24,16 @@ An early-stage real-time chat application built with Node.js, Express, Socket.IO
 ### Prerequisites
 
 - Node.js and npm
-- MongoDB running locally on the default port (the server connects to `mongodb://localhost:27017/testdb`)
+- MongoDB (local by default: `mongodb://localhost:27017/testdb`, configurable with `MONGO_URI`)
 
 ### Install and run
 
 ```bash
 cd chat
+cp .env.example .env    # then set JWT_SECRET, e.g. from: node generateSecretKey.js
 npm install
-npm install cors body-parser
 node server.js
 ```
-
-`server.js` requires `cors` and `body-parser`, which are not listed in `package.json`, hence the second install command.
 
 Open http://localhost:3000 in a browser.
 
@@ -43,8 +41,9 @@ Open http://localhost:3000 in a browser.
 
 | Variable | Description |
 | --- | --- |
+| `MONGO_URI` | MongoDB connection string (optional, defaults to the local `testdb`) |
+| `JWT_SECRET` | Secret used to sign and verify login tokens (required) |
 | `PORT` | Server port (optional, defaults to 3000) |
-| `JWT_SECRET` | Used by `middleware/auth.js` (the middleware is not currently wired into any route) |
 
 ## Project structure
 
@@ -65,8 +64,6 @@ This project is a work in progress. These gaps remain before it runs end to end:
 - No socket handler joins clients to rooms, and the online-users list is never populated.
 - Passwords are hashed both in the `/register` route and in the User model's pre-save hook, so logging in with a newly registered account fails.
 - The Message model expects ObjectId references for `user` and `roomId`, but the server stores the username string.
-- The MongoDB connection string and JWT secret are hard-coded in `server.js`.
-- The `node_modules` directory is committed to the repository.
 
 ## License
 
